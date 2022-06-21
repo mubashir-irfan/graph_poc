@@ -1,0 +1,25 @@
+.vertices {
+  margin: 30px;
+  font-size: 25px;
+}
+
+.undirected-checbkox-container {
+  width: 150px;
+  height: max-content;
+  margin-top: 17px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+
+  input[type="checkbox"] { margin-top: 6px; }
+}
+
+.page-rank {
+  width: 50px;
+  text-align: center;
+  border-bottom: 1px solid gray;
+}
+
+.reset-btn {
+  background-color: red;
+}

@@ -1,0 +1,49 @@
+<div class="container">
+  <section>
+    <div class="non-weighted-graph-container d-flex y-center">
+      <h3>Non-Weighted Graph</h3>
+      <p class="red">{{errorMessage}}</p>
+      <div class="d-flex y-center w-80 m-10 border-bottom">
+        <div>
+          <h4 class="d-inline-block">Vertices</h4>
+          <div class="vertices">{{graph.allVertices.toString()}}</div>
+        </div>
+        <div class="d-flex p-20">
+          <input placeholder="Enter New Vertix Name" minlength="1" maxlength="1" #vertexInput/>
+          <button (click)="createVertex(vertexInput.value.toUpperCase()); vertexInput.value=''" class="ml-22 elevation-1" title="Add Vertix">Add</button>
+        </div>
+      </div>
+
+      <div class="d-flex y-center w-80 m-10 border-bottom">
+        <div class="mb-10">
+          <h4 class="d-inline-block">Edges</h4>
+        </div>
+        <div class="d-flex p-20">
+          <span class="undirected-checbkox-container">
+            <label for="undirectedEdge">Undirected</label>
+            <input type="checkbox" title="undirectedEdge" #undirectedCheckbox/>
+          </span>
+          <input placeholder="Enter First Vertex" minlength="1" maxlength="1" #firstVertexInput/>
+          <input placeholder="Enter Second Vertex" minlength="1" maxlength="1" #secondVertexInput class="ml-22"/>
+          <button
+            (click)="createEdge(firstVertexInput.value.toUpperCase(),secondVertexInput.value.toUpperCase(), undirectedCheckbox.checked);firstVertexInput.value='';secondVertexInput.value=''" class="ml-22 elevation-1" title="Add Vertix">Add</button>
+        </div>
+      </div>
+
+      <div class="d-flex y-center w-80 m-10 border-bottom">
+        <h4 class="d-inline-block">Page Ranks</h4>
+        <div class="d-flex p-20">
+          <input placeholder="Enter Vertex Name" minlength="1" maxlength="1" #vertexRankInput/>
+          <button (click)="pageRankValue.value = '';getPageRank(vertexRankInput.value.toUpperCase()); vertexRankInput.value=''" class="ml-22 elevation-1" title="Add Vertix">Determine Rank</button>
+          <input id="rankPositionDisplay" readonly title="pageRank" #pageRankValue class="page-rank ml-22"/>
+        </div>
+      </div>
+      <button class="reset-btn" (click)="resetGraph()">Reset Graph</button>
+      <div class="d-flex y-center w-80 m-10">
+        <textarea #graphPrintArea placeholder="Once the graph has edges, a layout detail will be printed here" [value]="graph.printGraph()"></textarea>
+      </div>
+    </div>
+  </section>
+</div>
+
+

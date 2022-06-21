@@ -1,0 +1,137 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Layout */
+
+.w-80 { width: 80% }
+
+.container {
+  margin-top: 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-inline-block {
+  display: inline-block;
+}
+
+.x-center {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.y-center {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Colors */
+$primary: rebeccapurple;
+$secondary: white;
+
+.color-primary {
+  color: $primary;
+}
+
+.color-secondary {
+  color: $secondary
+}
+
+.bg-color-primary {
+  background-color: $primary;
+}
+
+.bg-color-secondary {
+  background-color: $secondary
+}
+
+.red {
+  color: Red;
+}
+
+/* borders */
+
+.border-bottom {
+  border-bottom: 1px solid darkslategrey;
+}
+
+/* Inputs */
+input {
+  padding: 15px;
+  border: 1px solid gray;
+  border-radius: 15px;
+}
+
+textarea {
+  padding: 15px;
+  border: 1px solid gray;
+  border-radius: 15px;
+  background-color: lightgray;
+  color: black;
+  width: 80%;
+  height: 500px;
+}
+
+/* Buttons */
+button {
+  color: $secondary;
+  background-color: $primary;
+  min-width: 100px;
+  max-width: 200px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+}
+
+/* Elevations */
+.elevation-1 {
+  box-shadow: 0 2px 4px lightslategray;
+}
+
+/* Spacings */
+$mp-interval: 2; // interval for margin and padding calculations
+
+@for $i from 0 through 20 {
+  $space: $i * $mp-interval;
+
+  .m-#{$space} { margin: #{$space}px; }
+
+  .mt-#{$space} { margin-top: #{$space}px; }
+
+  .mb-#{$space} { margin-bottom: #{$space}px; }
+
+  .mb-#{$space}-imp { margin-bottom: #{$space}px !important; }
+
+  .mr-#{$space} { margin-right: #{$space}px; }
+
+  .ml-#{$space} { margin-left: #{$space}px; }
+
+  .ml-#{$space}-imp { margin-left: #{$space}px !important; }
+
+  .p-#{$space} { padding: #{$space}px; }
+
+  .pt-#{$space} { padding-top: #{$space}px; }
+
+  .pt-#{$space}-imp { padding-top: #{$space}px !important; }
+
+  .pb-#{$space} { padding-bottom: #{$space}px; }
+
+  .pb-#{$space}-imp { padding-bottom: #{$space}px !important; }
+
+  .pr-#{$space} { padding-right: #{$space}px; }
+
+  .pl-#{$space} { padding-left: #{$space}px; }
+
+  .px-#{$i} { padding-inline: #{$i}px; }
+
+  .px-#{$i}-imp { padding-inline: #{$i}px !important; }
+
+  .py-#{$i}-imp { padding-block: #{$i}px !important; }
+
+}
