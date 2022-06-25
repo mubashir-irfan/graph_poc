@@ -74,11 +74,12 @@ export class Graph {
    * @returns graph's string representation e.g A => B \n B => C
    */
   public printGraph() {
+    if(!this.pageRanksCalcs.calculated) this.calculatepageRanksCalcs();
     let printStr = '';
     this.vertices.forEach(vertex => {
       const neighboursList = this.adjacencyObject[vertex];
       neighboursList.forEach(
-        (neighbour: string) => printStr+=`${vertex} => ${neighbour}\n`
+        (neighbour: string) => printStr+=`${vertex}(${this.verticesRankingPosition[vertex]}) => ${neighbour}(${this.verticesRankingPosition[neighbour]})\n`
       );
 
     });
