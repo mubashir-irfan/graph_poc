@@ -7,11 +7,15 @@ This repository provides a basic demo of a Non-Weighted Graph Data Structure. It
 - Detecting if a vertex/edge exists
 - Get out-degree of a given node
 - Get pointer nodes of a given node
+- A default graph to play aroun with
 
-# How to Run
+## How to Run
 The repo has two directories. One for client and one for server. Both require independent run of `npm install` comman as both have their own dependency configuration.
 
 Once require modules are installed, run `npm start` in `graph_Client` directory and `node server.js` in `graph_server` directory. Client app will open on port number 4200 and server will listen on on port number 5555 by default.
+
+## Tests
+In the client directory, run `ng test` for testing of all native features of non-weighted graph implementation. It also tests for correctness of page rank calculations of the default graph.
 
 ## Implementation
 The implementation uses an Adjacency Object structured as follows:
