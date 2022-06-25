@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServerApi } from '../services/server-api';
 
 import { Graph } from './graph';
 
@@ -10,7 +11,11 @@ import { Graph } from './graph';
 export class GraphComponent implements OnInit {
   public graph: Graph;
   public errorMessage: string = '';
-  constructor() {
+
+  private isGraphChanged: boolean = false;
+  private pageRanksFromServer: any = null;
+
+  constructor(private api: ServerApi) {
     this.graph = new Graph();
   }
 
@@ -44,10 +49,10 @@ export class GraphComponent implements OnInit {
     if (errorText) this.showError(errorText)
   }
 
-  public getPageRank(v: string): void {
-    if (!v) { this.showError('Inavlid Vertex'); return; };
+  public getPageRank(vertex: string): void {
+    if (!vertex || !this.graph.hasVertex(vertex)) { this.showError('Inavlid Vertex'); return; };
     this.resetError();
-    const pageRank = this.graph.getPageRank(v);
+    const pageRank = this.graph.getPageRank(vertex);
     if (!pageRank) { this.showError('Inavlid Vertex'); return; };
     const positionField: HTMLInputElement = document.getElementById('rankPositionDisplay') as HTMLInputElement;
     positionField.value = pageRank.toString();
@@ -57,12 +62,37 @@ export class GraphComponent implements OnInit {
     this.graph.reset();
   }
 
+  public logGraphToConsole(): void {
+    console.log(this.graph);
+  }
+
   private showError(message: string): void {
     this.errorMessage = message;
   }
 
   private resetError(): void {
     this.errorMessage = '';
+  }
+
+  public fetchRanksFromServer(vertex: string): string {
+    if (!vertex || !this.graph.hasVertex(vertex)) { this.showError('Inavlid Vertex'); return ''; };
+
+    if (!this.isGraphChanged && this.pageRanksFromServer) return this.pageRanksFromServer[vertex];
+
+    const payload =  {
+      vertices: this.graph.allVertices,
+      adjacencyObject: this.graph.adjacency,
+      pointerNodes: this.graph.getPointersConfig(),
+      outDegree: this.graph.getOutDegreeConfig(),
+    }
+    console.log('payload', payload)
+    this.api.get('graph/ranks', payload).subscribe((res: any) => {
+      this.pageRanksFromServer = res;
+
+      const displayElement: HTMLInputElement = document.getElementById('rankPositionDisplayServer') as HTMLInputElement;
+      displayElement.value = res[vertex];
+    });
+    return '';
   }
 
 }

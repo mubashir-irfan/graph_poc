@@ -8,7 +8,11 @@ app.use(cors());
 
 // parse requests of content-type - application/json
 app.use(express.json());
+app.use(express.raw());
 
-app.listen(PORT, (req,res) => {
-  logger.info(`Graph POC BE listening on port ${PORT}!`);
+// Routes
+require('./routes/graph.routes.js')(app);
+
+app.listen(PORT, () => {
+  console.log(`Graph POC BE listening on port ${PORT}!`);
 });

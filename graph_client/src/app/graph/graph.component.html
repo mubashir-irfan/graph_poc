@@ -38,6 +38,14 @@
           <input id="rankPositionDisplay" readonly title="pageRank" #pageRankValue class="page-rank ml-22"/>
         </div>
       </div>
+      <div class="d-flex y-center w-80 m-10 border-bottom">
+        <h4 class="d-inline-block">Calculate Page Ranks on Server</h4>
+        <div class="d-flex p-20">
+          <input placeholder="Enter Vertex Name" minlength="1" maxlength="1" #vertexRankServerInput/>
+          <button (click)="pageRankServerValue.value = ''; pageRankServerValue.value = fetchRanksFromServer(vertexRankServerInput.value.toUpperCase()); vertexRankInput.value=''" class="ml-22 elevation-1" title="Add Vertix">Determine Rank</button>
+          <input id="rankPositionDisplayServer" readonly title="pageRank" #pageRankServerValue class="page-rank ml-22"/>
+        </div>
+      </div>
       <button class="reset-btn" (click)="resetGraph()">Reset Graph</button>
       <div class="d-flex y-center w-80 m-10">
         <textarea #graphPrintArea placeholder="Once the graph has edges, a layout detail will be printed here" [value]="graph.printGraph()"></textarea>
@@ -45,5 +53,7 @@
     </div>
   </section>
 </div>
+
+<button (click)="logGraphToConsole()">Log Graph to Console</button>
 
 

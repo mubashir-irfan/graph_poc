@@ -9,7 +9,8 @@ export class Graph {
   private adjacencyObject: any = {}; // stores vertices as keys and an array of their neighours as values e.g { A: ["B", "C"]};
   private pageRanksCalcs: any = { calculated: false }; // The calculated flag is used for memoization
   private verticesRankingPosition: any = {}; // stores vertices as keys and their integer position as values
-
+  private pointerObject: any = null;
+  private outDegreeConfig: any = null;
 
   /**
    * Adds a vertex to the graph
@@ -86,6 +87,19 @@ export class Graph {
   }
 
   /**
+   * Function for getting configuration of pointer nodes of all vertices
+   * @returns object with vertices as keys and an array of their pointer nodes as values
+   */
+  public getPointersConfig() {
+    if (this.pointerObject) return this.pointerObject;
+    this.pointerObject = {};
+    this.vertices.forEach(v => {
+      this.pointerObject[v] = this.getPointerNodes(v)
+    });
+    return this.pointerObject;
+  }
+
+  /**
    * Determines the number of outgoing edges a vertex has.
    * @param v string name of the vertex
    * @returns number in case of success and a string in case of error
@@ -95,6 +109,20 @@ export class Graph {
       return 'Vertex not found';
     }
     return this.adjacencyObject[v].length;
+  }
+
+  /**
+   * Function for getting configuration of out degree of all vertices
+   * @returns object with vertices as keys and outdegree as respective values
+   */
+   public getOutDegreeConfig() {
+    if (this.outDegreeConfig) return this.outDegreeConfig;
+    this.outDegreeConfig = {};
+    this.vertices.forEach(v => {
+      this.outDegreeConfig[v] = this.getOutDegree(v)
+    });
+
+    return this.outDegreeConfig;
   }
 
   /**
@@ -125,7 +153,7 @@ export class Graph {
   /**
    * checks if graph has a given vertex
    * @param v string name of the vertex
-   * @returns a boolean denoting the vertex is present or not 
+   * @returns a boolean denoting the vertex is present or not
    */
   public hasVertex(v: string): boolean {
     return this.vertices.includes(v);
