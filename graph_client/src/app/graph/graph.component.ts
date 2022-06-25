@@ -49,13 +49,14 @@ export class GraphComponent implements OnInit {
     if (errorText) this.showError(errorText)
   }
 
-  public getPageRank(vertex: string): void {
+  public getPageRank(vertex: string): void | number {
     if (!vertex || !this.graph.hasVertex(vertex)) { this.showError('Inavlid Vertex'); return; };
     this.resetError();
     const pageRank = this.graph.getPageRank(vertex);
     if (!pageRank) { this.showError('Inavlid Vertex'); return; };
     const positionField: HTMLInputElement = document.getElementById('rankPositionDisplay') as HTMLInputElement;
     positionField.value = pageRank.toString();
+    return pageRank;
   }
 
   public resetGraph(): void {
