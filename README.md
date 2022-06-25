@@ -28,7 +28,7 @@ Page Ranks are calculated as sum of pointer nodes divided by their out-degree. T
 ## Design
 The frontend interface is written in Angular/TypeScript. Nearly all of the features are provided natively in the frontend application. For the purposes of demonstration, a Node app-let has been added which exposes an API for calculating a provided graph's page ranks.
 
-For the Backend app-let, API is exposed on endpoint `/api/graph/ranks`. It consumes a stringified JSON payload representing the graph in structure detailed in Implementation section. It returns an object with vertices as keys and ranks as values.
+For the Backend app-let, API is exposed on endpoint `/api/graph/ranks`. It consumes a stringified JSON payload representing the graph using the structure detailed in Implementation section. It returns an object with vertices as keys and ranks as values.
 
 ## Limitations
 - The Frontend demonstrates only Non-Weighted Graph Implementation completely.
